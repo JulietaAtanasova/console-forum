@@ -22,7 +22,7 @@ public class RegisterCommand extends AbstractCommand {
 		String password = PasswordUtility.hash(this.getData().get(2));
 		String email = this.getData().get(3);
 
-		if(isUserWithUserName(userName) || isUserWithEmail(email)){
+		if(hasUserWithUserName(userName) || hasUserWithEmail(email)){
 			throw new CommandException(Messages.USER_ALREADY_REGISTRED);
 		}
 		
@@ -49,7 +49,7 @@ public class RegisterCommand extends AbstractCommand {
 		users.add(user);
 
 		this.getForum().getOutput()
-				.append(String.format(Messages.REGISTER_SUCCESS, userName, users.size()));
+				.append(String.format(Messages.REGISTER_SUCCESS, userName, user.getId()));
 	}
 
 }

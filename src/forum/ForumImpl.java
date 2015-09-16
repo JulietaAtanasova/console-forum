@@ -1,7 +1,7 @@
 package forum;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 import commands.exceptions.CommandException;
@@ -93,7 +93,7 @@ public class ForumImpl implements Forum {
 	}
 
 	@Override
-	public void setCurrenUser(User currentUser) {
+	public void setCurrentUser(User currentUser) {
 		this.currentUser = currentUser;
 	}
 
@@ -124,7 +124,7 @@ public class ForumImpl implements Forum {
 			command.execute();
 		} catch (CommandException e) {
 			this.getOutput().append(e.getMessage());
-		} catch (IllegalStateException e){
+		} catch (IllegalStateException e) {
 			this.getOutput().append(e.getMessage());
 		}
 		System.out.println(this.getOutput());
@@ -134,12 +134,12 @@ public class ForumImpl implements Forum {
 		String registerAdminCommand = String.format("register %s %s $s ADMINISTRATOR", defaultAdminUser,
 				defaultAdminPassword, defaultAdminEmail);
 		Executable command = CommandFactory.create(registerAdminCommand, this);
-		
+
 		try {
 			command.execute();
 		} catch (CommandException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

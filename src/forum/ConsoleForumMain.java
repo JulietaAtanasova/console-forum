@@ -1,4 +1,5 @@
 package forum;
+
 import contracts.Forum;
 
 public class ConsoleForumMain {

@@ -21,7 +21,7 @@ public class LoginCommand extends AbstractCommand {
 			throw new CommandException(Messages.ALREADY_LOGGED_IN);
 		}
 		
-		if(!isUserWithUserName(userName)){
+		if(!hasUserWithUserName(userName)){
 			throw new CommandException(Messages.INVALID_LOGIN_DETAILS);
 		}
 		
@@ -30,7 +30,7 @@ public class LoginCommand extends AbstractCommand {
 			throw new CommandException(Messages.INVALID_LOGIN_DETAILS);
 		}
 		
-		this.getForum().setCurrenUser(user);
+		this.getForum().setCurrentUser(user);
 		this.getForum().getOutput()
 				.append(String.format(Messages.LOGIN_SUCCESS, user.getUserName()));
 	}

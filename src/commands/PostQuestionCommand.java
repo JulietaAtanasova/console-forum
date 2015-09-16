@@ -6,7 +6,6 @@ import contracts.Question;
 import contracts.User;
 import entities.posts.QuestionImpl;
 import forum.Messages;
-import utility.PasswordUtility;
 
 public class PostQuestionCommand extends AbstractCommand {
 
@@ -17,7 +16,7 @@ public class PostQuestionCommand extends AbstractCommand {
 	@Override
 	public void execute() throws CommandException {
 		String title = this.getData().get(1);
-		String body = PasswordUtility.hash(this.getData().get(2));
+		String body = this.getData().get(2);
 
 		if(!this.getForum().getLogged()){
 			throw new CommandException(Messages.NOT_LOGGED);

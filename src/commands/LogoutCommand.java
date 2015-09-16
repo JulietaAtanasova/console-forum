@@ -12,13 +12,13 @@ public class LogoutCommand extends AbstractCommand {
 
 	@Override
 	public void execute() throws CommandException {
-		if(!this.getForum().getLogged()){
+		if (!this.getForum().getLogged()) {
 			throw new CommandException(Messages.NOT_LOGGED);
 		}
-		
-		this.getForum().setCurrenUser(null);
-		this.getForum().getOutput()
-				.append(String.format(Messages.LOGOUT_SUCCESS));
+
+		this.getForum().setCurrentQuestion(null);
+		this.getForum().setCurrentUser(null);
+		this.getForum().getOutput().append(String.format(Messages.LOGOUT_SUCCESS));
 	}
 
 }

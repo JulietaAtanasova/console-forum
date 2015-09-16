@@ -7,7 +7,7 @@ public class AnswerImpl implements Answer {
 	private int id;
 	private String body;
 	private User author;
-	
+
 	public AnswerImpl(int id, String body, User author) {
 		this.setId(id);
 		this.setBody(body);
@@ -42,5 +42,11 @@ public class AnswerImpl implements Answer {
 	@Override
 	public void setAuthor(User author) {
 		this.author = author;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("[ Answer ID: %s ]\nPosted by: %s\nAnswer Body: %s\n--------------------", this.getId(),
+				this.getAuthor().getUserName(), this.getBody());
 	}
 }

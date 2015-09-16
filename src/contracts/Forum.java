@@ -21,7 +21,7 @@ public interface Forum {
 
 	User getCurrentUser();
 
-	void setCurrenUser(User currentUser);
+	void setCurrentUser(User currentUser);
 
 	StringBuilder getOutput();
 

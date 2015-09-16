@@ -22,7 +22,7 @@ public class RegisterCommand extends AbstractCommand {
 		String password = PasswordUtility.hash(this.getData().get(2));
 		String email = this.getData().get(3);
 
-		if(users.stream().anyMatch(u -> u.getUserName().equals(userName) || u.getEmail().equals(email))){
+		if(isUserWithUserName(userName) || isUserWithEmail(email)){
 			throw new CommandException(Messages.USER_ALREADY_REGISTRED);
 		}
 		
@@ -36,7 +36,7 @@ public class RegisterCommand extends AbstractCommand {
 				if (!users.isEmpty()) {
 					throw new CommandException(Messages.REG_ADMIN_NOT_ALLOWED);
 				}
-				// TO DO: Implement administrator
+				user = new UserImpl(users.size() + 1, userName, password, email);
 				break;
 			default:
 				user = new UserImpl(users.size() + 1, userName, password, email);
@@ -49,7 +49,7 @@ public class RegisterCommand extends AbstractCommand {
 		users.add(user);
 
 		this.getForum().getOutput()
-				.append(String.format(Messages.REGISTER_SUCCESS, userName, users.get(users.size() - 1)));
+				.append(String.format(Messages.REGISTER_SUCCESS, userName, users.size()));
 	}
 
 }

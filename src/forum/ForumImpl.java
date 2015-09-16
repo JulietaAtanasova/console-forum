@@ -1,6 +1,7 @@
 package forum;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import commands.exceptions.CommandException;
@@ -140,4 +141,5 @@ public class ForumImpl implements Forum {
 			e.printStackTrace();
 		}
 	}
+	
 }

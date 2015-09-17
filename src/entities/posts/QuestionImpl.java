@@ -13,7 +13,6 @@ public class QuestionImpl implements Question {
 	private String body;
 	private List<Answer> answers;
 	private User author;
-	private Answer bestAnswer;
 
 	public QuestionImpl(int id, String title, String body, User author) {
 		this.setId(id);
@@ -21,7 +20,6 @@ public class QuestionImpl implements Question {
 		this.setBody(body);
 		this.setAuthor(author);
 		this.setAnswers(new ArrayList<Answer>());
-		this.setBestAnswer(null);
 	}
 
 	@Override
@@ -73,31 +71,28 @@ public class QuestionImpl implements Question {
 		this.answers = answers;
 	}
 
-	public Answer getBestAnswer() {
-		return bestAnswer;
-	}
-
-	public void setBestAnswer(Answer bestAnswer) {
-		this.bestAnswer = bestAnswer;
-	}
-
 	@Override
 	public String toString() {
-		String result = String.format(
+		String output = String.format(
 				"[ Question ID: %s ]\nPosted by: %s\nQuestion Title: %s\nQuestion Body: %s\n====================",
 				this.getId(), this.getAuthor().getUserName(), this.getTitle(), this.getBody());
-		if (this.getAnswers().isEmpty()) {
-			return result;
-		} else {
-			result += "\n";
-		}
-		List<Answer> answers = this.getAnswers();
-		if (this.bestAnswer != null) {
-			result += this.getBestAnswer();
-			answers.remove(this.getBestAnswer());
-		}
-		for (Answer answer : answers) {
-			result += answer + "\n";
+		output += "\n" + printAnswers();
+		return output;
+	}
+
+	private String printAnswers() {
+		String result = "No answers";
+		if (!this.getAnswers().isEmpty()) {
+			result = "Answers:";
+			String regularAnswers = "";
+			for (Answer answer : answers) {
+				if(answer instanceof BestAnswer){
+					result += "\n" + answer;
+					continue;
+				}
+				regularAnswers += "\n" + answer;
+			}
+			result += regularAnswers;
 		}
 		return result;
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 import commands.exceptions.CommandException;
 import contracts.Forum;
 import contracts.User;
+import entities.users.Admin;
 import entities.users.UserImpl;
 import forum.Messages;
 import utility.PasswordUtility;
@@ -27,7 +28,6 @@ public class RegisterCommand extends AbstractCommand {
 		}
 		
 		User user = null;
-
 		if (this.getData().size() > 4) {
 			String role = this.getData().get(4);
 
@@ -36,7 +36,7 @@ public class RegisterCommand extends AbstractCommand {
 				if (!users.isEmpty()) {
 					throw new CommandException(Messages.REG_ADMIN_NOT_ALLOWED);
 				}
-				user = new UserImpl(users.size() + 1, userName, password, email);
+				user = new Admin(users.size() + 1, userName, password, email);
 				break;
 			default:
 				user = new UserImpl(users.size() + 1, userName, password, email);
@@ -47,7 +47,6 @@ public class RegisterCommand extends AbstractCommand {
 		}
 
 		users.add(user);
-
 		this.getForum().getOutput()
 				.append(String.format(Messages.REGISTER_SUCCESS, userName, user.getId()));
 	}

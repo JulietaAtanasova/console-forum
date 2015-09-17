@@ -125,7 +125,9 @@ public class ForumImpl implements Forum {
 		} catch (CommandException e) {
 			this.getOutput().append(e.getMessage());
 		} catch (IllegalStateException e) {
-			this.getOutput().append(e.getMessage());
+			this.getOutput().append(Messages.INVALID_COMMAND);
+		} catch (NullPointerException e) {
+			this.getOutput().append(Messages.INVALID_COMMAND);
 		}
 		System.out.println(this.getOutput());
 	}

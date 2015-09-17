@@ -4,7 +4,9 @@ import commands.exceptions.CommandException;
 import contracts.Answer;
 import contracts.Forum;
 import contracts.User;
+import entities.posts.BestAnswer;
 import entities.posts.QuestionImpl;
+import entities.users.Admin;
 import forum.Messages;
 
 public class MakeBestAnswerCommand extends AbstractCommand {
@@ -37,16 +39,15 @@ public class MakeBestAnswerCommand extends AbstractCommand {
 
 		User currentUser = this.getForum().getCurrentUser();
 
-		System.out.println(currentUser.getId());
-		System.out.println(this.getForum().getCurrentQuestion().getAuthor().getId());
-		if ((currentUser.getId() != this.getForum().getCurrentQuestion().getAuthor().getId()) || !currentUser.getUserName().equals("admin")) {
+		if (currentUser.getId() != currentQuestion.getAuthor().getId() && !(currentUser instanceof Admin)){
 			throw new CommandException(Messages.NO_PERMISSION);
 		}
 
 		Answer answer = this.getForum().getAnswers().stream().filter(a -> a.getId() == answerId).findFirst().get();
-		currentQuestion.setBestAnswer(answer);
-		
-		this.getForum().getOutput().append(String.format(Messages.BEST_ANSWER_SUCCESS, answerId));
+		BestAnswer bestAnswer = new BestAnswer(answer.getId(), answer.getBody(), answer.getAuthor());
+		this.getForum().getCurrentQuestion().getAnswers().remove(answer);
+		this.getForum().getCurrentQuestion().getAnswers().add(bestAnswer);
+		this.getForum().getOutput().append(String.format(Messages.BEST_ANSWER_SUCCESS, answer.getId()));
 	}
 
 }

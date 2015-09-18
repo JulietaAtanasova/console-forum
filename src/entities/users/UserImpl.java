@@ -7,15 +7,16 @@ import contracts.Question;
 import contracts.User;
 
 public class UserImpl implements User {
-
+	static int instanceCounter = 0;
 	private int id;
 	private String userName;
 	private String password;
 	private String email;
 	private List<Question> questions;
 
-	public UserImpl(int id, String name, String password, String email) {
-		this.setId(id);
+	public UserImpl(String name, String password, String email) {
+		instanceCounter++;
+		this.setId(instanceCounter);
 		this.setUserName(name);
 		this.setPasword(password);
 		this.setEmail(email);

@@ -4,8 +4,8 @@ import contracts.Administrator;
 
 public class Admin extends UserImpl implements Administrator {
 	
-	public Admin(int id, String name, String password, String email) {
-		super(id, name, password, email);
+	public Admin(String name, String password, String email) {
+		super(name, password, email);
 	}
 
 }

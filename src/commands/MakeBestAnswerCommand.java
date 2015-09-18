@@ -1,5 +1,8 @@
 package commands;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import commands.exceptions.CommandException;
 import contracts.Answer;
 import contracts.Forum;
@@ -42,11 +45,16 @@ public class MakeBestAnswerCommand extends AbstractCommand {
 		if (currentUser.getId() != currentQuestion.getAuthor().getId() && !(currentUser instanceof Admin)){
 			throw new CommandException(Messages.NO_PERMISSION);
 		}
-
+		
+		List<Answer> answers = this.getForum().getCurrentQuestion().getAnswers();
 		Answer answer = this.getForum().getAnswers().stream().filter(a -> a.getId() == answerId).findFirst().get();
-		BestAnswer bestAnswer = new BestAnswer(answer.getId(), answer.getBody(), answer.getAuthor());
-		this.getForum().getCurrentQuestion().getAnswers().remove(answer);
-		this.getForum().getCurrentQuestion().getAnswers().add(bestAnswer);
+		BestAnswer bestAnswer = new BestAnswer(answerId, answer.getBody(), answer.getAuthor());
+		answers.remove(answer);
+		answers.add(bestAnswer);
+		this.getForum().getAnswers().remove(answer);
+		this.getForum().getAnswers().add(bestAnswer);
+		answers = answers.stream().sorted((a1, a2) -> Integer.compare(a1.getId(), a2.getId())).collect(Collectors.toList());
+
 		this.getForum().getOutput().append(String.format(Messages.BEST_ANSWER_SUCCESS, answer.getId()));
 	}
 

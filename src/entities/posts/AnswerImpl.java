@@ -43,7 +43,7 @@ public class AnswerImpl implements Answer {
 	public void setAuthor(User author) {
 		this.author = author;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("[ Answer ID: %s ]\nPosted by: %s\nAnswer Body: %s\n--------------------", this.getId(),

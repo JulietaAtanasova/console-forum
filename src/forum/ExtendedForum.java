@@ -26,7 +26,6 @@ public class ExtendedForum extends ForumImpl {
 		}
 
 		int hotQuestions = getHotQuestions();
-
 		int activeUsers = getActiveUsers();
 		System.out.printf(Messages.GENERAL_HEADER_MESSAGE, hotQuestions, activeUsers);
 		System.out.println("\n~~~~~~~~~~~~~~~~~~~~");

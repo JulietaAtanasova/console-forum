@@ -86,7 +86,7 @@ public class QuestionImpl implements Question {
 			result = "Answers:";
 			String regularAnswers = "";
 			for (Answer answer : answers) {
-				if(answer instanceof BestAnswer){
+				if (answer instanceof BestAnswer) {
 					result += "\n" + answer;
 					continue;
 				}

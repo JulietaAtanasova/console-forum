@@ -1,5 +1,7 @@
 package commands;
 
+import java.util.List;
+
 import commands.exceptions.CommandException;
 import contracts.Answer;
 import contracts.Forum;
@@ -29,7 +31,8 @@ public class PostAnswerCommand extends AbstractCommand {
 		int answerId = this.getForum().getAnswers().size() + 1;
 		Answer answer = new AnswerImpl(answerId, body, currentUser);
 
-		this.getForum().getCurrentQuestion().getAnswers().add(answer);
+		List<Answer> answers = this.getForum().getCurrentQuestion().getAnswers();
+		answers.add(answer);
 		this.getForum().getAnswers().add(answer);
 		this.getForum().getOutput()
 				.append(String.format(Messages.POST_ANSWER_SUCCESS, answerId));

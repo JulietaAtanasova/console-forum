@@ -23,7 +23,8 @@ public class ShowQuestionsCommand extends AbstractCommand {
 		}
 
 		this.getForum().setCurrentQuestion(null);
-		List<String> questionsToPrint = new ArrayList<String>(questions.stream().map(Object::toString).collect(Collectors.toList()));
+		List<String> questionsToPrint = new ArrayList<String>(
+				questions.stream().map(Object::toString).collect(Collectors.toList()));
 		this.getForum().getOutput().append(String.join("\n", questionsToPrint));
 	}
 

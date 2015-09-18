@@ -36,14 +36,14 @@ public class RegisterCommand extends AbstractCommand {
 				if (!users.isEmpty()) {
 					throw new CommandException(Messages.REG_ADMIN_NOT_ALLOWED);
 				}
-				user = new Admin(users.size() + 1, userName, password, email);
+				user = new Admin(userName, password, email);
 				break;
 			default:
-				user = new UserImpl(users.size() + 1, userName, password, email);
+				user = new UserImpl(userName, password, email);
 				break;
 			}
 		} else {
-			user = new UserImpl(users.size() + 1, userName, password, email);
+			user = new UserImpl(userName, password, email);
 		}
 
 		users.add(user);

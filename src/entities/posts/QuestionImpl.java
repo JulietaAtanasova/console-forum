@@ -2,6 +2,7 @@ package entities.posts;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import contracts.Answer;
 import contracts.Question;
@@ -85,6 +86,8 @@ public class QuestionImpl implements Question {
 		if (!this.getAnswers().isEmpty()) {
 			result = "Answers:";
 			String regularAnswers = "";
+			List<Answer> answers = this.getAnswers().stream()
+					.sorted((a1, a2) -> Integer.compare(a1.getId(), a2.getId())).collect(Collectors.toList());
 			for (Answer answer : answers) {
 				if (answer instanceof BestAnswer) {
 					result += "\n" + answer;
